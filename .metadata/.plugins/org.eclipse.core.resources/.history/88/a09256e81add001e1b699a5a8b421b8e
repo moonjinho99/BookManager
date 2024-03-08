@@ -1,0 +1,24 @@
+var book_code;
+var book_title;
+var book_author;
+var book_cnt;
+var price;
+var book_content;
+
+function DeleteBook()
+{
+	book_code = $("#book_code").val();
+	
+	$.ajax({
+		url:  '/book/deleteBook',
+		data: {"book_code" : book_code},
+		type: "POST",
+		success : function(){
+			location.href="list";
+		}
+			
+		
+		
+	});
+
+}

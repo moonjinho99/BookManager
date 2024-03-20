@@ -69,8 +69,9 @@ public class BookController {
 			ImgDTO imgDTO = bookService.getImgList(book.get(i).getBook_code());
 			System.out.println("book_code : "+book.get(i).getBook_code());
 			System.out.println("이미지 정보 : "+imgDTO);
+			book.get(i).setBook_img(imgDTO);
 			String fileCallPath = URLEncoder.encode(imgDTO.getImg_path() + "/" + imgDTO.getImg_uuid() + "_" + imgDTO.getImg_name(), "UTF-8");
-			book.get(i).setImg("<img src='/book/display?fileName=" + fileCallPath + "'>");	
+			book.get(i).setImg("<img class='bookImg' name='bookImg' src='/book/display?fileName=" + fileCallPath + "'>");	
 		}
 		
 		
@@ -218,6 +219,7 @@ public class BookController {
 		
 		model.addAttribute("bookDTO",bookDTO);
 		model.addAttribute("img",fileCallPath);
+		model.addAttribute("imgList",imgDTO);
 	
 		return "/book/bookDetail";
 	}
@@ -289,4 +291,133 @@ public class BookController {
 	{
 		bookService.updateBook(bookDTO);
 	}
+	
+	/*@PostMapping(value="/update_uploadImg",produces=MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<ImgDTO>> updateBook(MultipartFile uploadFile){
+		
+		//이미지 파일 체크
+		File checkFile = new File(uploadFile.getOriginalFilename());
+		String type=null;
+		
+		try {
+			type = Files.probeContentType(checkFile.toPath());
+			System.out.println("MIME TYPE : "+type);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		
+		if(!type.startsWith("image")){
+			List<ImgDTO> list = null;
+			
+			return new ResponseEntity<List<ImgDTO>>(list,HttpStatus.BAD_REQUEST);
+		}
+		
+		
+		String uploadFolder = "C:\\upload\\update";
+		
+		SimpleDateFormat  sdf = new SimpleDateFormat("yyyy-MM-dd");
+		
+		Date date = new Date();
+		
+		String str = sdf.format(date);
+		
+		String datePath = str.replace("-",File.separator);
+		
+		File uploadPath = new File(uploadFolder,datePath);
+		
+		if(uploadPath.exists() == false)
+		{
+			uploadPath.mkdirs();
+		}
+	
+		
+		List<ImgDTO> imgList = new ArrayList<ImgDTO>();
+		
+		ImgDTO imgDto = new ImgDTO();
+		
+		
+		String uploadFileName = uploadFile.getOriginalFilename();
+		
+		imgDto.setImg_name(uploadFileName);
+		imgDto.setImg_path(datePath);
+		
+		String uuid = UUID.randomUUID().toString();
+		imgDto.setImg_uuid(uuid);
+		
+		uploadFileName = uuid+"_"+uploadFileName;
+		
+		File saveFile = new File(uploadPath, uploadFileName);
+		
+		try{
+			uploadFile.transferTo(saveFile);
+			
+			File thumbnailFile = new File(uploadPath,"s_"+uploadFileName);
+			
+			BufferedImage bo_image = ImageIO.read(saveFile);
+			
+			double ratio = 3;
+			
+			int width = (int) (bo_image.getWidth() / ratio);
+			int height = (int) (bo_image.getHeight() / ratio);
+			
+			Thumbnails.of(saveFile)
+			.size(width, height)
+			.toFile(thumbnailFile);
+			
+			BufferedImage bt_image = new BufferedImage(width, height, BufferedImage.TYPE_3BYTE_BGR);
+			
+			Graphics2D graphic = bt_image.createGraphics();
+			
+			graphic.drawImage(bo_image,0,0,300,500,null);
+			
+			ImageIO.write(bt_image, "jpg", thumbnailFile);
+			
+		} catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		imgList.add(imgDto);
+		
+		ResponseEntity<List<ImgDTO>> result = new ResponseEntity<List<ImgDTO>>(imgList, HttpStatus.OK);
+		
+		return result;
+			
+	}*/
+	
+	/*@PostMapping("/deleteUpdateFile")
+	public ResponseEntity<String> deleteUpdateFile(String fileName){
+		
+		File file = null;
+		
+		try{
+			
+			//썸네일 파일 삭제
+			file = new File("c:\\upload\\update\\"+URLDecoder.decode(fileName,"UTF-8"));
+			
+			file.delete();
+			
+			//원본 파일 삭제
+			String originFileName = file.getAbsolutePath().replace("s_", "");
+			
+			file = new File(originFileName);
+			
+			file.delete();
+			
+		} catch(Exception e)
+		{
+			e.printStackTrace();
+			
+			return new ResponseEntity<String>("fail",HttpStatus.NOT_IMPLEMENTED);
+		}
+		
+		return new ResponseEntity<String>("success",HttpStatus.OK);
+	}*/
+	
+	@PostMapping("/updateImg")
+	@ResponseBody
+	public void updateImg(ImgDTO imgDTO){
+		bookService.updateImg(imgDTO);
+	}
+	
 }

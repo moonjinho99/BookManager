@@ -2,18 +2,20 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="dataformat" key="selection"/>
+		<item value="deleteFile" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="dataformat"/>
-			<item value="databind"/>
-			<item value="fnInit"/>
-			<item value="servlet"/>
-			<item value="java"/>
-			<item value="security"/>
+			<item value="deleteFile"/>
+			<item value="deleteDile"/>
+			<item value="delete"/>
+			<item value="showUploadImage"/>
+			<item value="maxsize"/>
+			<item value="uploadImg "/>
+			<item value="uploadImg"/>
+			<item value="show"/>
 		</list>
 		<list key="replacehistory">
 		</list>

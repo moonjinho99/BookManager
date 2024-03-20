@@ -21,6 +21,8 @@ public interface BookMapper {
 	
 	public void updateBookList(BookDTO bookDTO);
 	
+	public void updateImg(ImgDTO imgDTO);
+	
 	public void deleteBookList(int book_code);
 	
 	public void deleteBookImg(int book_code);

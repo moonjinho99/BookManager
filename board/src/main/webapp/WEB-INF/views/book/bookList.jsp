@@ -15,7 +15,6 @@
     height:600px;
     box-sizing: border-box;
 }
-
 h2{
 	text-align: center;
 }

@@ -55,6 +55,13 @@
   		where book_code = #{book_code}
   </update>
   
+  <update id="updateImg" parameterType="com.tck.board.img.model.ImgDTO">
+  		update tbl_book_img
+  		set img_name = #{img_name},
+  		img_path = #{img_path},
+  		img_uuid = #{img_uuid}
+  		where book_code = #{book_code}
+  </update>
   
   
   

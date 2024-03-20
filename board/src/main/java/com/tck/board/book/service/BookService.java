@@ -50,6 +50,11 @@ public class BookService {
 		bookMapper.updateBookList(bookDTO);
 	}
 	
+	public void updateImg(ImgDTO imgDTO)
+	{
+		bookMapper.updateImg(imgDTO);
+	}
+	
 	
 	public void deleteBoook(int book_code)
 	{

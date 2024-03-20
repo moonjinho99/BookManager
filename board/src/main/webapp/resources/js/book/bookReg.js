@@ -28,9 +28,9 @@ $("input[type='file']").on("change",function(e){
     	}
 	});
 		
-/*	if(!fileCheck(fileObj.name, fileObj.size)){
+	if(!fileCheck(fileObj.name, fileObj.size)){
 		return false;
-	}*/
+	}
 	
 });
 

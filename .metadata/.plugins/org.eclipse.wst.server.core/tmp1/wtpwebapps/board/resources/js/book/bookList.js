@@ -1,4 +1,5 @@
 var searchList = {}
+var bookData = [];
 
 window.onload = function(){
 	searchTable();
@@ -20,8 +21,7 @@ function searchTable(){
 			type:"POST",
 			url:"/book/list.do",
 			contentType:"application/json; charset=utf-8",
-			dataFilter:function(jsonString){
-				console.log("받은데이터 : "+jsonString);
+			dataFilter:function(jsonString){							
 				return jsonString;
 			}
 		},
@@ -36,7 +36,7 @@ function searchTable(){
 		sServerMethod: "POST",
 		searching: true,
 	});
-	
+
 }
 
 $("#book_table").on('click', 'tbody tr', function () {

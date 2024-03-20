@@ -67,6 +67,21 @@ h2{
 img{
 	width:100%; height:100%;
 }
+
+.imgDeleteBtn{
+	    position: absolute;
+	    top: 8%;
+	    right: 52%;
+	    background-color: #ef7d7d;
+	    color: wheat;
+	    width: 30px;
+	    height: 30px;
+	    border-radius: 50%;
+	    text-align: center;
+	    border: none;
+	    display: block;
+	    cursor: pointer;	
+	}
 </style>
 
 <body>
@@ -75,8 +90,8 @@ img{
 	<table class="head">
 		<tr>
 			<td rowspan="6" style="width:500px;border: 1px solid black; border-collapse: collapse;">
-			<div id="#imgArea" style="margin:0 auto;width:60%; height:90%;">
-				<img src="/book/display?fileName=${img}">
+			<div id="#imgArea" class="imgArea" style="margin:0 auto;width:60%; height:90%;">
+				<img id="detailBookImg" src="/book/display?fileName=${img}">
 			</div>		
 			</td>
 		</tr>
